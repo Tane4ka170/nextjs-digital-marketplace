@@ -1,6 +1,22 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { ArrowDownToLine } from "lucide-react";
 import Link from "next/link";
+
+const perks = [
+  {
+    name: "Instant Delivery",
+    icon: ArrowDownToLine,
+    description:
+      "Receive your assets instantly via email and download them immediately",
+  },
+  {
+    name: "Instant Delivery",
+    icon: ArrowDownToLine,
+    description:
+      "Receive your assets instantly via email and download them immediately",
+  },
+];
 
 export default function Home() {
   return (
@@ -25,7 +41,9 @@ export default function Home() {
       </MaxWidthWrapper>
 
       <section className="border-t border-yellow-200 bg-yellow-50">
-        <MaxWidthWrapper className=""></MaxWidthWrapper>
+        <MaxWidthWrapper className="py-20">
+          <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0"></div>
+        </MaxWidthWrapper>
       </section>
     </>
   );
