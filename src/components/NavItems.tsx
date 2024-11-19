@@ -9,7 +9,17 @@ const NavItems = () => {
   const [activeIndex, setActiveIndex] = useState<null | number>(null);
 
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {};
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveIndex(null);
+      }
+    };
+
+    document.addEventListener("keydown", handler);
+
+    return () => {
+      document.removeEventListener("keydown", handler);
+    };
   }, []);
 
   const isAnyOpen = activeIndex !== null;
