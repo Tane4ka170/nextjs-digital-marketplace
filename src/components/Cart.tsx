@@ -38,8 +38,6 @@ const Cart = () => {
         <SheetHeader className="space-y-2.5 pr-6">
           <SheetTitle>Cart (0)</SheetTitle>
         </SheetHeader>
-
-        {/* Перевірка на кількість товарів в кошику */}
         {itemCount > 0 ? (
           <>
             <div className="flex w-full flex-col pr-6">
@@ -75,13 +73,31 @@ const Cart = () => {
           </>
         ) : (
           <div className="flex h-full flex-col items-center justify-center space-y-1">
-            <div className="relative mb-4 h-60 w-60 text-muted-foreground">
+            <div
+              className="relative mb-4 h-60 w-60 text-muted-foreground"
+              aria-hidden="true"
+            >
               <Image
                 src="/empty-cart.png"
                 alt="Icon empty shopping cart"
                 fill
               />
             </div>
+            <div className="text-xl font-semibold">
+              Your cart is currently empty
+            </div>
+            <SheetTrigger asChild>
+              <Link
+                href="/products"
+                className={buttonVariants({
+                  variant: "link",
+                  size: "sm",
+                  className: "text-sm text-muted-foreground",
+                })}
+              >
+                Add items to your cart before proceeding to checkout
+              </Link>
+            </SheetTrigger>
           </div>
         )}
       </SheetContent>
