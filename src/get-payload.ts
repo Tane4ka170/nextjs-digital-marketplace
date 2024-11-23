@@ -6,11 +6,11 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
-\\
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let cached = (global as any).payload;
 
 if (!cached) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   cached = (global as any).payload = {
     client: null,
     promise: null,
@@ -22,7 +22,7 @@ interface Args {
 }
 
 export const getPayloadClient = async ({
-  initOptions,
+  initOptions = {}, // Значення за замовчуванням
 }: Args = {}): Promise<Payload> => {
   if (!process.env.PAYLOAD_SECRET) {
     throw new Error("PAYLOAD_SECRET is missing");
@@ -34,14 +34,8 @@ export const getPayloadClient = async ({
 
   if (!cached.promise) {
     cached.promise = payload.init({
-      email: {
-        transport: transporter,
-        fromAddress: "hello@joshtriedcoding.com",
-        fromName: "DigitalHippo",
-      },
-      secret: process.env.PAYLOAD_SECRET,
-      local: initOptions?.express ? false : true,
-      ...(initOptions || {}),
+      config: initOptions.config || (await import("./payload.config")).default,
+      ...initOptions,
     });
   }
 
